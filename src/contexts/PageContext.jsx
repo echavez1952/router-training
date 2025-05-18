@@ -1,42 +1,23 @@
-import React from 'react'
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
-export const PageContext = () => {
+export const PageNameContext = createContext();
 
-  const PageNameContext = createContext();
+export const ContextApp = () => {
 
-  const ParentPage = () => (
+  return (
     <PageNameContext.Provider value="ParentPage">
-      <h1>Parent page title</h1>
+      <h1 className="font-bold text-xl text-red-500">Context Page title</h1>
       <ChildComponent />
     </PageNameContext.Provider>
   );
 
-  const ChildComponent = () => {
+  function ChildComponent() {
     const pageName = useContext(PageNameContext);
 
     return (
-      <p>This a sub-component, nested in the {pageName} page</p>
-    );
-  };
-
-}
-
-export const UserContext = createContext();
-const [user, setUser] = useState("Jesse Hall");
-
-  return (
-    <UserContext.Provider value={user}>
-      <h1>{`Hello ${user}!`}</h1>
-      <Component1 />
-    </UserContext.Provider>
-  );
-
-  function Component1() {
-    return (
       <>
-        <h1>Component 1</h1>
-        <Component2 />
+      <p>This a sub-component, nested in the <span className="font-bold text-blue-500">{pageName}</span> page </p>
       </>
-    );
+    )
   }
+}  
